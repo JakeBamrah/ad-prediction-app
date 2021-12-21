@@ -92,7 +92,7 @@ class Predict():
             All nodes are returned in torch.tensor format with shape:
                 array([[numpy.float64, ...]])
         """
-        loader = DataGenerator(data_dict, keys=['CN','MCI','AD'])
+        loader = DataGenerator(data=data_dict)
         data = loader.get_task_batch(
                 batch_size=sample_size,
                 n_way=self.args.test_N_way,

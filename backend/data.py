@@ -7,12 +7,8 @@ import random
 
 class DataGenerator(data.DataLoader):
     """Data loader for model training"""
-    def __init__(self, data, keys=['CN','MCI', 'AD']):
-        data_ = {}
-        for i in range(len(keys)):
-            data_[i] = data[keys[i]]
-
-        self.data = data_
+    def __init__(self, data):
+        self.data = data
         self.channel = 1
         self.feature_shape = np.array((self.data[1][0])).shape
 
