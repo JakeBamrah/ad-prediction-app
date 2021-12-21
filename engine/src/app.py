@@ -5,6 +5,7 @@ import umap
 
 import json
 from collections import defaultdict
+import logging
 
 from predict import Predict
 from gnn_models import SoftmaxModule
@@ -21,11 +22,13 @@ PREDICT_COLS = {
         'MOTHDEM', 'NPITOTAL',
         'PHC_EXF', 'PHC_LAN',
         'PHC_MEM', 'PTEDUCAT',
-        'PTGENDER'
-    }
+        'PTGENDER'}
 EXCLUDE_COLS = {'RID', 'AD_LABEL', 'CDR'}
 DATA_ROOT = 'data'
 BEST_MODEL = f'{DATA_ROOT}/amgnn_best_model.pkl'
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 
 def fill_patient_details(patient_to_predict, df, predict_cols):
@@ -82,12 +85,23 @@ def create_umap_embeddings(df):
 
 
 # https://aws.amazon.com/blogs/machine-learning/using-container-images-to-run-pytorch-models-in-aws-lambda/
-def lambda_handler(event, context):
+def handler(event, context):
     """Lambda handler for providing node prediction."""
     # NOTE: make sure keys in patient_to_label match PREDICT_COLS
-    body = json.loads(event['body'])
-    patient_to_label = body['patient_to_label']
-    sample_size = body.get('sample_size', 64)
+    try:
+        body = json.loads(event['body'])
+        patient_to_label = body['patient_to_label']
+        sample_size = body.get('sample_size', 64)
+
+        logger.info(f'Predicting for node: {body}')
+    except KeyError:
+        logger.debug(f"Unable to parse body {str(event)}")
+        return
+
+    if not patient_to_label:
+        return {
+            'statusCode': 501,
+        }
 
     # find similar patient from samples and fill in MRI cols
     df = pd.read_csv(f'{DATA_ROOT}/combined.csv')
@@ -106,6 +120,8 @@ def lambda_handler(event, context):
         key = int(df['AD_LABEL'][i]) - 1
         data_dict[key].append(subj)
 
+    logger.info(f'Predicting for node: {unlabelled_node}')
+
     # make prediction for the given subject
     amgnn = torch.load(BEST_MODEL, torch.device('cpu'))
     softmax_module = SoftmaxModule()
@@ -122,11 +138,11 @@ def lambda_handler(event, context):
 
     umap_embeddings = create_umap_embeddings(norm_df)
 
+    logger.info(f'\
+            predicted_label: {pred_label},\
+            umap_embeddings: {umap_embeddings}'
+            )
     return {
-        'statusCode': 200,
-        'body': json.dumps({
             'predicted_label': int(pred_label),
             'df': df[PREDICT_COLS].to_json(orient='records'),
-            'umap_embeddings': umap_embeddings.tolist()
-        })
-    }
+            'umap_embeddings': umap_embeddings.tolist()}
