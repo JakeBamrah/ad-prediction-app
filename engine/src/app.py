@@ -24,8 +24,7 @@ PREDICT_COLS = {
         'PHC_MEM', 'PTEDUCAT',
         'PTGENDER'}
 EXCLUDE_COLS = {'RID', 'AD_LABEL', 'CDR'}
-DATA_ROOT = 'data'
-BEST_MODEL = f'{DATA_ROOT}/amgnn_best_model.pkl'
+BEST_MODEL = 'amgnn_best_model.pkl'
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -89,22 +88,19 @@ def handler(event, context):
     """Lambda handler for providing node prediction."""
     # NOTE: make sure keys in patient_to_label match PREDICT_COLS
     try:
-        body = json.loads(event['body'])
-        patient_to_label = body['patient_to_label']
-        sample_size = body.get('sample_size', 64)
+        patient_to_label = event['patient_to_label']
+        sample_size = event.get('sample_size', 64)
 
-        logger.info(f'Predicting for node: {body}')
+        logger.info(f'Predicting for node: {str(event)}')
     except KeyError:
         logger.debug(f"Unable to parse body {str(event)}")
-        return
+        return f"Event not working: {event}"
 
     if not patient_to_label:
-        return {
-            'statusCode': 501,
-        }
+        return { 'statusCode': 501 }
 
     # find similar patient from samples and fill in MRI cols
-    df = pd.read_csv(f'{DATA_ROOT}/combined.csv')
+    df = pd.read_csv('combined.csv')
     filled_p = fill_patient_details(patient_to_label, df, PREDICT_COLS)
 
     # patient to predict will always be last row
@@ -145,4 +141,5 @@ def handler(event, context):
     return {
             'predicted_label': int(pred_label),
             'df': df[PREDICT_COLS].to_json(orient='records'),
-            'umap_embeddings': umap_embeddings.tolist()}
+            'umap_embeddings': umap_embeddings.tolist()
+            }

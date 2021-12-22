@@ -14,4 +14,14 @@ RUN pip install -r requirements.txt
 
 COPY src/ .
 
+# copies the CONTENTS of the directory into target directory
+# COPY data/ /tmp/
+# RUN ls /tmp/
+
+COPY data/ .
+RUN ls .
+
+# update permissions to compensate for aws lambda's limited default permissions
+RUN chmod 744 $(find . -type f)
+
 CMD ["app.handler"]
