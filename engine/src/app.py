@@ -83,9 +83,8 @@ def create_umap_embeddings(df):
     return embeddings
 
 
-# https://aws.amazon.com/blogs/machine-learning/using-container-images-to-run-pytorch-models-in-aws-lambda/
 def handler(event, context):
-    """Lambda handler for providing node prediction."""
+    """Lambda handler providing node prediction."""
     # NOTE: make sure keys in patient_to_label match PREDICT_COLS
     try:
         patient_to_label = event['patient_to_label']
@@ -94,7 +93,7 @@ def handler(event, context):
         logger.info(f'Predicting for node: {str(event)}')
     except KeyError:
         logger.debug(f"Unable to parse body {str(event)}")
-        return f"Event not working: {event}"
+        return { 'statusCode': 501, 'body': f"Event not working: {event}" }
 
     if not patient_to_label:
         return { 'statusCode': 501 }
