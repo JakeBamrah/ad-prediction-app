@@ -1,11 +1,9 @@
 import torch
 import numpy as np
 import pandas as pd
-import umap
 
-import json
-from collections import defaultdict
 import logging
+from collections import defaultdict
 
 from predict import Predict
 from gnn_models import SoftmaxModule
@@ -69,20 +67,6 @@ def format_df_for_graph(df):
     np_arr = np.nan_to_num(np_arr)
     return np_arr
 
-def create_umap_embeddings(df):
-    """Dimensionally reduce dataframe into UMAP embeddings for visualization."""
-    SEED = 1092
-    clusterable_embedding = umap.UMAP(
-        n_neighbors=5,
-        min_dist=0.0,
-        n_components=3,
-        random_state=SEED
-    )
-    clusterable_embedding.fit_transform(df)
-    embeddings = clusterable_embedding.embedding_
-    return embeddings
-
-
 def handler(event, context):
     """Lambda handler providing node prediction."""
     # NOTE: make sure keys in patient_to_label match PREDICT_COLS
@@ -130,15 +114,14 @@ def handler(event, context):
 
     # update unlablled patient with predicted label
     df.loc[len(df) - 1, 'AD_LABEL'] = pred_label
-
-    umap_embeddings = create_umap_embeddings(norm_df)
+    df_dict = df[PREDICT_COLS].to_json(orient='records'),
 
     logger.info(f'\
             predicted_label: {pred_label},\
-            umap_embeddings: {umap_embeddings}'
+            df: {df_dict}'
             )
     return {
             'predicted_label': int(pred_label),
-            'df': df[PREDICT_COLS].to_json(orient='records'),
-            'umap_embeddings': umap_embeddings.tolist()
+            'df': df_dict,
+            'norm_arr': np_arr.tolist()
             }
