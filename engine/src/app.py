@@ -10,17 +10,15 @@ from gnn_models import SoftmaxModule
 
 
 PREDICT_COLS = {
-        'ADAS_TOTAL', 'AD_LABEL',
-        'AGE', 'CBB_SCORE_%', 'CDR',
+        'ADAS_TOTAL', 'AGE', 'AD_LABEL',
+        'CBB_SCORE_%', 'CDR',
         'COMP_EXEC_FUNC_SCORE',
         'COMP_MEM_SCORE', 'FATHDEM',
         'LOG_MEM_DEL_TOTAL',
         'LOG_MEM_IMM_TOTAL',
         'MMSE', 'MODHACH_SCORE',
         'MOTHDEM', 'NPITOTAL',
-        'PHC_EXF', 'PHC_LAN',
-        'PHC_MEM', 'PTEDUCAT',
-        'PTGENDER'}
+        'PTEDUCAT', 'PTGENDER'}
 EXCLUDE_COLS = {'RID', 'AD_LABEL', 'CDR'}
 BEST_MODEL = 'amgnn_best_model.pkl'
 
@@ -51,7 +49,7 @@ def fill_patient_details(patient_to_predict, df, predict_cols):
 
 def min_max_norm(df, cols_to_exclude=EXCLUDE_COLS):
     """Normalize dataframe for a set of columns."""
-    cols_to_normalize = [c for c in df.columns if c  not in cols_to_exclude]
+    cols_to_normalize = [c for c in df.columns if c not in cols_to_exclude]
     df = df.loc[:, cols_to_normalize]
 
     negative_cols = [k for k,v in df.items() if v.min() < 0]
