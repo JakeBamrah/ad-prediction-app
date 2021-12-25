@@ -1,2 +1,4 @@
 engine/env
 engine/src/__pycache__
+engine/data/combined.csv
+frontend/.env
