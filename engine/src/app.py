@@ -72,13 +72,21 @@ def handler(event, context):
         patient_to_label = event['patient_to_label']
         sample_size = event.get('sample_size', 64)
 
-        logger.info(f'Predicting for node: {str(event)}')
+        logger.info(f'Predicting for node: {str(patient_to_label)}')
     except KeyError:
         logger.debug(f"Unable to parse body {str(event)}")
-        return { 'statusCode': 501, 'body': f"Event not working: {event}" }
+        return {
+                'statusCode': 'invalid_event',
+                'description': f"Invalid event: {event}",
+                'body': event
+            }
 
     if not patient_to_label:
-        return { 'statusCode': 501 }
+        return {
+                'statusCode': 'invalid_event',
+                'descritpion': f"No patient given: {event}",
+                'body': event
+            }
 
     # find similar patient from samples and fill in MRI cols
     df = pd.read_csv('combined.csv')
@@ -119,7 +127,10 @@ def handler(event, context):
             df: {df_dict}'
             )
     return {
-            'predicted_label': int(pred_label),
-            'df': df_dict,
-            'norm_arr': np_arr.tolist()
+            'statusCode': 'success',
+            'body' : {
+                'predicted_label': int(pred_label),
+                'df': df_dict,
+                'norm_arr': np_arr.tolist()
+                }
             }
