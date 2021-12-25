@@ -1,0 +1,56 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  html {
+    @apply font-normal text-grey-900;
+  }
+
+  h2 {
+    @apply my-0 leading-5;
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    @apply my-0;
+    font-size: 0.875rem;
+  }
+
+  p {
+    @apply m-0;
+    font-size: 0.875rem;
+  }
+
+  a {
+    @apply no-underline cursor-pointer;
+    font-size: 0.875rem;
+  }
+
+  input {
+    font-size: 0.875rem;
+  }
+
+  li {
+    @apply list-none select-none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    font-size: 0.875rem;
+  }
+}
+
+@layer components {
+  .windows-scrollbar::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .windows-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .windows-scrollbar::-webkit-scrollbar-thumb {
+    background: #E5E7EB;
+  }
+}
