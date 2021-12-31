@@ -19,7 +19,15 @@
     "react-scripts": "4.0.3",
     "typescript": "^4.2.4",
     "umap-js": "^1.3.3",
-    "web-vitals": "^1.1.1"
+    "web-vitals": "^1.1.1",
+    "vite": "^2.6.7",
+    "vite-plugin-svgr": "^0.4.0",
+    "@vitejs/plugin-react-refresh": "^1.3.6",
+    "autoprefixer": "^10.4.0",
+    "html-webpack-plugin": "^4.5.0",
+    "postcss": "^8.4.5",
+    "@headlessui/react": "^1.4.1",
+    "tailwindcss": "^3.0.7"
   },
   "scripts": {
     "dev": "vite --host",
@@ -48,18 +56,10 @@
     ]
   },
   "devDependencies": {
-    "@headlessui/react": "^1.4.1",
     "@types/aws4": "^1.11.0",
     "@types/node": "^16.11.17",
     "@types/react": "^17.0.3",
     "@types/react-router-dom": "^5.1.7",
-    "@vitejs/plugin-react-refresh": "^1.3.6",
-    "autoprefixer": "^10.4.0",
-    "html-webpack-plugin": "^4.5.0",
-    "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.7",
-    "tsc-watch": "^4.5.0",
-    "vite": "^2.6.7",
-    "vite-plugin-svgr": "^0.4.0"
+    "tsc-watch": "^4.5.0"
   }
 }
