@@ -3,3 +3,4 @@ engine/src/__pycache__
 engine/data/combined.csv
 frontend/.env
 frontend/node_modules/
+frontend/build
