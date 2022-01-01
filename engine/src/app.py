@@ -38,10 +38,10 @@ def fill_patient_details(patient_to_predict, df, predict_cols):
     # NOTE: make sure columns are in the same order as reduced df
     patient_vals = []
     for col in cols_to_replace:
-        if patient_to_predict[col]:
-            patient_vals.append(patient_to_predict[col])
-        else:
+        if patient_to_predict[col] is None:
             patient_vals.append(df[col].mean())
+        else:
+            patient_vals.append(patient_to_predict[col])
 
     patient_vals = np.array(patient_vals)
     diff = reduced - patient_vals

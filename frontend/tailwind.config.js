@@ -5,32 +5,29 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: "class", // or 'media' or 'class'
   theme: {
-    colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      black: colors.black,
-      white: colors.white,
-      grey: {
-        ...colors.gray,
-        350: "#b0b0b0",
-      },
-      red: colors.red,
-      yellow: colors.amber,
-      blue: colors.blue,
-      dark: {
-        100: "#AAAAAA",
-        300: "#777777",
-        400: "#333333",
-        500: "#222222",
-      },
-    },
     extend: {
+      colors: {
+        slate: {
+          ...colors.slate,
+          150: "#e5eaf2",
+          250: "#d5dee9"
+        },
+        grey: {
+          ...colors.gray,
+          350: "#b0b0b0",
+        },
+        dark: {
+          100: "#AAAAAA",
+          300: "#777777",
+          400: "#333333",
+          500: "#222222",
+        },
+      },
+      maxHeight: {
+        '128': '36rem'
+      },
       fontFamily: {
         sans: ['"Graphik"', 'sans-serif'],
-      },
-      boxShadow: {
-        "sidebar-l": "rgb(0 0 0 / 5%) 8px 0px 12px",
-        "sidebar-d": "rgb(0 0 0 / 35%) 12px 0 12px"
       },
       screens: {
         xs: '400px',
