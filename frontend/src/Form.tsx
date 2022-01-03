@@ -344,8 +344,9 @@ const InputForm: FunctionComponent<FormProps> = ({ onSubmit }) => {
                 "flex flex-col pl-6 h-full basis-1/2 relative space-y-4 font-light"
               )}
             >
+              <p>- Enter the relevant fields for the given patient.</p>
               <p>- Empty fields will be replaced by their mean using the ADNI dataset.</p>
-              <p>- Results are <b>not</b> saved.</p>
+              <p>- Results will <b>not</b> be saved.</p>
             </div>
 
             <div className="absolute font-light bottom-0 right-0">

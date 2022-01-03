@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useLayoutEffect } from 'react'
+import React, { FunctionComponent } from 'react'
 import Plot from 'react-plotly.js'
 
 
@@ -34,9 +34,10 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
     return customdata
   }
 
-  rest.symbols = Array(total_samples).fill('x')
-  rest.sizes = Array(total_samples).fill(6)
-  rest.colors = rest.AD_LABEL
+  const color_map: { [key: number]: string } = { 1: "#73c6b6", 2: "#e74c3c", 3: "#f9e79f" }
+  rest.symbols = Array(total_samples).fill('diamond')
+  rest.sizes = Array(total_samples).fill(8)
+  rest.colors = rest.AD_LABEL.map((n: number) => color_map[n])
   rest.opacities = Array(total_samples).fill(0.1)
 
   predicted_patient.symbols = ['circle']
@@ -54,12 +55,10 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
       size: rest.sizes,
       symbol: rest.symbols,
       opacity: rest.opacities,
-      line: {
-        color: rest.colors,
-      },
+      color: rest.colors,
     },
     type: 'scatter3d'
-  };
+  }
 
   const predicted = {
     x: predicted_patient.x, y: predicted_patient.y, z: predicted_patient.z,
@@ -76,7 +75,7 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
       },
     },
     type: 'scatter3d'
-  };
+  }
 
   const layout = {
     width: 400,
@@ -98,10 +97,13 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
       pad: 0
     },
     // initialze axis facing predicted node
-    xaxis:[0, predicted_patient.x],
-    yaxis:[0, predicted_patient.y],
-    zaxis:[0, predicted_patient.z]
+    xaxis: [0, predicted_patient.x],
+    yaxis: [0, predicted_patient.y],
+    zaxis: [0, predicted_patient.z]
   }
+
+  // TODO: make graph points more contrasty colours
+  // Provide explanation for points
 
   // hide plotly options
   const config = { displayModeBar: false }
