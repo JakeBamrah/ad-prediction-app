@@ -46,7 +46,19 @@ const App = () => {
           'y': embeddings[1],
           'z': embeddings[2]
         }
-        setData(data_emb)
+
+        // separate out rest and predicted patient for visualizing
+        const emb_len = normalized_data.length
+        const keys = Object.keys(data_emb)
+        const rest: { [key: string]: number[] } = {}
+        const predicted_patient: { [key: string]: number[] } = {}
+        keys.forEach(k => {
+          const slice = data_emb[k].slice(0, emb_len - 2)
+          rest[k] = slice
+          predicted_patient[k] = [data_emb[k][emb_len - 1]]
+        })
+
+        setData({ rest, predicted_patient, total_samples: emb_len })
         setPredictedLabel(predicted_label)
 
         setLoadingState('Complete')
@@ -60,7 +72,6 @@ const App = () => {
     return
   }
 
-  console.log(predicted_label)
   return (
     <div className={`
         flex h-screen items-center justify-center sm:px-8 sm:py-4
@@ -70,7 +81,7 @@ const App = () => {
       <div className={`
         h-4/6 sm:h-full w-full sm:max-h-128 sm:max-w-4xl sm:rounded-2xl
         p-8 sm:p-12 relative
-        bg-slate-150 neumorph-light
+        bg-slate-100 neumorph-light
       `}>
         <Switch>
           <Route exact path="/">
@@ -92,7 +103,12 @@ const App = () => {
           </Route>
 
           <Route exact path="/results">
-            <Results next_url="/form" />
+            {data &&
+              <Results
+                data={data}
+                next_url="/form"
+              />
+            }
           </Route>
 
           <Redirect from="*" to="/" />
