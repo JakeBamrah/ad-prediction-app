@@ -106,6 +106,7 @@ const App = () => {
             {data &&
               <Results
                 data={data}
+                predicted_label={predicted_label}
                 next_url="/form"
               />
             }
