@@ -31,6 +31,22 @@ module.exports = {
       },
       screens: {
         xs: '400px',
+      },
+      keyframes: {
+        fade: {
+          '0%': {
+            opacity: '0.1'
+          },
+          '50%': {
+            opacity: '.8'
+          },
+          '100%': {
+            opacity: '0.1'
+          }
+        }
+      },
+      animation: {
+        fade: 'fade 9s ease-in-out infinite',
       }
     },
   },

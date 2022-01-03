@@ -16,7 +16,8 @@ export type FormValues = {
 type Section = "Cognitive" |
   "Psychiatric" |
   "Psychological" |
-  "Demographic"
+  "Demographic" |
+  "Help"
 type FormProps = {
   onSubmit: (values: FormValues) => void
 }
@@ -337,6 +338,16 @@ const InputForm: FunctionComponent<FormProps> = ({ onSubmit }) => {
               </Field>
             </div>
 
+            <div
+              className={clsx(
+                section === 'Help' ? "block" : "hidden",
+                "flex flex-col pl-6 h-full basis-1/2 relative space-y-4 font-light"
+              )}
+            >
+              <p>- Empty fields will be replaced by their mean using the ADNI dataset.</p>
+              <p>- Results are <b>not</b> saved.</p>
+            </div>
+
             <div className="absolute font-light bottom-0 right-0">
               <Button type="submit">
                 Predict patient
@@ -353,7 +364,8 @@ const SECTIONS: Section[] = [
   "Demographic",
   "Psychiatric",
   "Psychological",
-  "Cognitive"
+  "Cognitive",
+  "Help"
 ]
 const INPUT_KEYS = [
   "AGE", "PTEDUCAT", "PTGENDER",
