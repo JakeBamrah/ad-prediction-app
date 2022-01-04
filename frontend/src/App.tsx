@@ -87,7 +87,7 @@ const App = () => {
         text-slate-400 relative
     `}>
       {!at_home &&
-        <div className="w-full w-full px-4 -mb-6">
+        <div className="w-full sm:max-w-4xl px-4 -mb-6">
           <Link onClick={resetLoadingState} to="/">
             <Logo className="h-32 w-32" />
           </Link>
