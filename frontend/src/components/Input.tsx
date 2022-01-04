@@ -71,7 +71,7 @@ const Input: FunctionComponent<InputProps> = (props) => {
   return (
     <div className="w-full flex flex-col">
       {label &&
-        <label className="pl-2 font-medium select-none">{label}</label>
+        <label className="pl-2 font-medium text-sm select-none">{label}</label>
       }
       <div
         className={clsx(

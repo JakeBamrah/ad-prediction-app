@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 
 import Button from './components/Button'
+import { ReactComponent as Logo } from './assets/logo.svg'
 
 
 type HomeProps = {
@@ -13,12 +14,11 @@ const Home: FunctionComponent<HomeProps> = ({ next_url }) => {
       className={`
         flex flex-col space-y-6 h-full w-full items-center justify-center
       `}>
-      <div className="h-48 w-48 bg-slate-300 rounded-full" />
-      <h2>ADGraph</h2>
-      <p className="hidden sm:block">
+        <Logo className="h-48 w-48 xs:h-64 xs:w-64 -mb-10"/>
+      <p className="hidden xs:block border-t-2 pt-5">
         Alzheimer's disease prediction and visualization
       </p>
-      <p className="block sm:hidden whitespace-pre-line text-center">
+      <p className="block xs:hidden whitespace-pre-line text-center border-t-2 pt-5">
         Alzheimer's disease prediction <br /> and visualization
       </p>
       <Link to={next_url}>

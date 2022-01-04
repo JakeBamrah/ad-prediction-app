@@ -20,7 +20,7 @@ const Select: FunctionComponent<SelectProps> = (props) => {
     <div
       onClick={onSelect}
       className={clsx(
-        selected ? "bg-slate-300 text-slate-200" : "bg-transparent",
+        selected ? "bg-slate-300 text-slate-100" : "bg-transparent",
         leftAlign ? "text-left" : "text-center",
         `rounded-full px-3 py-2 font-light
         select-none duration-100 hover:cursor-pointer

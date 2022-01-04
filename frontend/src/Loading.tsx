@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react'
 import clsx from 'clsx'
+import { Link } from 'react-router-dom'
 
 import { AlertCircle } from 'react-feather'
-import { ReactComponent as NN0SVG } from './components/icons/nn1.svg';
-import { ReactComponent as NN1SVG } from './components/icons/nn2.svg';
-import { ReactComponent as NN2SVG } from './components/icons/nn3.svg';
+import { ReactComponent as NN0SVG } from './assets/nn1.svg';
+import { ReactComponent as NN1SVG } from './assets/nn2.svg';
+import { ReactComponent as NN2SVG } from './assets/nn3.svg';
 
 
 export type LoadingState = "Incomplete" | "Predicting" | "Building UMAP" | "Complete" | "Failed"
@@ -56,9 +57,9 @@ const Loading: FunctionComponent<{ loading_state: LoadingState }> = (props) => {
             {loading_state}
           </h2>
           <p>Request failed—please
-            <a href="/form" className="mx-1 underline">
+            <Link to="/form" className="mx-1 underline">
               revisit the form
-            </a>
+            </Link>
             and try again.
           </p>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react'
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
+import { Switch, Route, Redirect, Link, useHistory, useLocation } from 'react-router-dom'
 import clsx from 'clsx'
+import { GitHub } from 'react-feather'
 
 import { loadAssets } from './data/AssetLoader'
 import PredictService from './data/PredictService'
@@ -10,15 +11,22 @@ import Disclaimer from './Disclaimer'
 import Form, { FormValues } from './Form'
 import Results from './Results'
 import Loading, { LoadingState } from './Loading'
+import { ReactComponent as Logo } from './assets/logo_small_use.svg'
 
 
 const App = () => {
   const [data, setData] = useState<any>(null)
   const [predicted_label, setPredictedLabel] = useState<number | null>(null)
+
   const [app_loading, setAppLoading] = useState<boolean>(true)
+
   const [loading_state, setLoadingState] = useState<LoadingState>('Incomplete')
+  const resetLoadingState = () => setLoadingState('Incomplete')
 
   const history = useHistory()
+
+  const location = useLocation()
+  const at_home = location.pathname === "/"
 
   const predict_service = useMemo(() => new PredictService(), [])
 
@@ -74,10 +82,17 @@ const App = () => {
 
   return (
     <div className={`
-        flex h-screen items-center justify-center sm:px-8 sm:py-4
+        flex flex-col h-screen items-center justify-center sm:px-8 py-0 sm:py-4
         bg-gradient-to-l from-slate-300 to-slate-200
-        text-slate-400
+        text-slate-400 relative
     `}>
+      {!at_home &&
+        <div className="w-full w-full px-4 -mb-6">
+          <Link onClick={resetLoadingState} to="/">
+            <Logo className="h-32 w-32" />
+          </Link>
+        </div>
+      }
       <div className={`
         h-4/6 sm:h-full w-full sm:max-h-128 sm:max-w-4xl sm:rounded-2xl
         p-8 sm:p-12 relative
@@ -108,7 +123,7 @@ const App = () => {
                 data={data}
                 predicted_label={predicted_label}
                 next_url="/form"
-                onReset={() => setLoadingState('Incomplete')}
+                onReset={resetLoadingState}
               />
             }
           </Route>
@@ -116,6 +131,15 @@ const App = () => {
           <Redirect from="*" to="/" />
         </Switch>
       </div>
+      <a
+        target="_blank"
+        rel="noreferrer"
+        className="flex pt-6 bottom-20"
+        href="https://github.com/JakeBamrah/ad_prediction_app"
+      >
+        <p>Github</p>
+        <GitHub className="ml-1 mt-1 h-3 w-3" />
+      </a>
     </div>
   )
 }

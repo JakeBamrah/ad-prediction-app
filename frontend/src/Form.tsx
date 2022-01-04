@@ -128,7 +128,7 @@ const InputForm: FunctionComponent<FormProps> = ({ onSubmit }) => {
               <Field name="PTGENDER">
                 {({ input }) => (
                   <div>
-                    <label className="pl-2 font-medium select-none">Gender</label>
+                    <label className="pl-2 font-medium text-sm select-none">Gender</label>
                     <div className="flex space-x-4">
                       <div className="basis-1/2">
                         <Select
@@ -153,7 +153,7 @@ const InputForm: FunctionComponent<FormProps> = ({ onSubmit }) => {
               <Field name="FATHDEM">
                 {({ input }) => (
                   <div>
-                    <label className="pl-2 font-medium select-none">Father Dementia</label>
+                    <label className="pl-2 font-medium text-sm select-none">Father Dementia</label>
                     <div className="flex space-x-4">
                       <div className="basis-1/2">
                         <Select
@@ -178,7 +178,7 @@ const InputForm: FunctionComponent<FormProps> = ({ onSubmit }) => {
               <Field name="MOTHDEM">
                 {({ input }) => (
                   <div>
-                    <label className="pl-2 font-medium select-none">Mother Dementia</label>
+                    <label className="pl-2 font-medium text-sm select-none">Mother Dementia</label>
                     <div className="flex space-x-4">
                       <div className="basis-1/2">
                         <Select
@@ -339,14 +339,24 @@ const InputForm: FunctionComponent<FormProps> = ({ onSubmit }) => {
             <div
               className={clsx(
                 section === 'Help' ? "block" : "hidden",
-                "flex flex-col pl-6 h-full basis-1/2 relative space-y-4 font-light"
+                "flex flex-col pl-6 h-full basis-1/2 relative overflow-y-scroll space-y-2 font-light"
               )}
             >
+              <h4 className="font-medium pb-1">Overview</h4>
               <p>- Enter the relevant fields for the given patient.</p>
               <p>- Empty fields will be replaced by their mean using the ADNI dataset.</p>
               <p>- Results will <b>not</b> be saved.</p>
+
+              <h4 className="font-medium pt-2 pb-1">Abbreviations</h4>
+              <p>- NPI Total: Neuropsychiatric Inventory</p>
+              <p>- L.M: Logical Memory</p>
+              <p>- MODHACH: Modified Hachinski Scale</p>
+              <p>- MMSE: Mini-Mental State Exam</p>
+              <p>- CBB: CogState Brief Battery</p>
             </div>
 
+            <div className="absolute font-light bg-slate-100 h-12 w-40 sm:hidden bottom-0 right-0">
+            </div>
             <div className="absolute font-light bottom-0 right-0">
               <Button type="submit">
                 Predict patient
