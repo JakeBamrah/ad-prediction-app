@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useState } from 'react'
 import Plot from 'react-plotly.js'
-import clsx from 'clsx'
+import { RefreshCw } from 'react-feather'
 
-import Breadcrumb from './components/Breadcrumb'
+import { Link } from 'react-router-dom'
+import Button from './components/Button'
 
 
 type Section = "UMAP" | "Predict"
@@ -10,13 +11,15 @@ type ResultsProps = {
   data: any
   next_url: string
   predicted_label: number | null
+  onReset: () => void
 }
 const Results: FunctionComponent<ResultsProps> = (props) => {
 
   const {
     data,
     next_url,
-    predicted_label
+    predicted_label,
+    onReset
   } = props
 
   const { rest, predicted_patient, total_samples } = data
@@ -137,17 +140,14 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
           w-full h-full text-justify relative
           overflow-y-hidden overflow-x-hidden
       `}>
-        <div className={clsx("w-full flex justify-center")}>
+        <div className="w-full flex justify-center">
           <Plot
             data={plot}
             layout={layout}
             config={config}
           />
         </div>
-        <div className={clsx(
-          "absolute bottom-0 left-0 flex flex-col",
-          "pb-4"
-        )}>
+        <div className="absolute bottom-0 left-0 flex flex-col">
           <h4 className="pb-4">Prediction Stats</h4>
           <div className="text-left">
             <div className="flex items-center">
@@ -170,6 +170,20 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
             <p>Clinical Dimentia Rating (CDR): {predicted_patient['CDR']}</p>
           </div>
         </div>
+      </div>
+      <div className="absolute bottom-0 right-0">
+        <Link to={next_url} onClick={onReset}>
+          <div className="hidden xs:block">
+            <Button >
+              New prediction
+            </Button>
+          </div>
+          <div className="block xs:hidden">
+            <Button >
+              <RefreshCw />
+            </Button>
+          </div>
+        </Link>
       </div>
     </div>
   )

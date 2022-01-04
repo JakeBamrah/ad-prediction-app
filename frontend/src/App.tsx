@@ -108,6 +108,7 @@ const App = () => {
                 data={data}
                 predicted_label={predicted_label}
                 next_url="/form"
+                onReset={() => setLoadingState('Incomplete')}
               />
             }
           </Route>
