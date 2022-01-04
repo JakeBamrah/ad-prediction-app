@@ -3,17 +3,17 @@ import clsx from 'clsx'
 import { Link } from 'react-router-dom'
 
 import { AlertCircle } from 'react-feather'
-import { ReactComponent as NN0SVG } from './assets/nn1.svg'
-import { ReactComponent as NN1SVG } from './assets/nn2.svg'
-import { ReactComponent as NN2SVG } from './assets/nn3.svg'
 import { ReactComponent as LogoFilled } from './assets/logo_round_filled.svg'
 
 
-export type LoadingState = "Incomplete" | "Predicting" | "Building UMAP" | "Complete" | "Failed"
+export type LoadingState = "Incomplete" |
+  "Predicting" |
+  "Building UMAP" |
+  "Complete" |
+  "Failed"
 const Loading: FunctionComponent<{ loading_state: LoadingState }> = (props) => {
   const { loading_state } = props
 
-  const logos = [NN0SVG, NN1SVG, NN2SVG]
   const hidden = ["Incomplete", "Complete"].includes(loading_state)
   const loading = ['Predicting', 'Building UMAP'].includes(loading_state)
   return (

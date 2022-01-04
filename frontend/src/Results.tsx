@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react'
 import { RefreshCw } from 'react-feather'
 
-import createPlotlyComponent from 'react-plotly.js/factory';
-import Plotly from 'plotly.js-dist-min';
+import Plotly from 'plotly.js-dist-min'
+import createPlotlyComponent from 'react-plotly.js/factory'
 
 import { Link } from 'react-router-dom'
 import Button from './components/Button'
@@ -192,10 +192,5 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
     </div>
   )
 }
-
-const SECTIONS: Section[] = [
-  "UMAP",
-  "Predict"
-]
 
 export default Results
