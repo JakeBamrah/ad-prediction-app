@@ -3,9 +3,10 @@ import clsx from 'clsx'
 import { Link } from 'react-router-dom'
 
 import { AlertCircle } from 'react-feather'
-import { ReactComponent as NN0SVG } from './assets/nn1.svg';
-import { ReactComponent as NN1SVG } from './assets/nn2.svg';
-import { ReactComponent as NN2SVG } from './assets/nn3.svg';
+import { ReactComponent as NN0SVG } from './assets/nn1.svg'
+import { ReactComponent as NN1SVG } from './assets/nn2.svg'
+import { ReactComponent as NN2SVG } from './assets/nn3.svg'
+import { ReactComponent as LogoFilled } from './assets/logo_round_filled.svg'
 
 
 export type LoadingState = "Incomplete" | "Predicting" | "Building UMAP" | "Complete" | "Failed"
@@ -30,21 +31,17 @@ const Loading: FunctionComponent<{ loading_state: LoadingState }> = (props) => {
               loading ? 'block' : 'hidden',
               "flex flex-col items-center")}>
             <div className="flex">
-              {logos.map((Logo, i) => (
-                <div
-                  key={i}
-                  style={{ animationDelay: `${(i + 1) * 3}s` }}
-                  className={clsx(
-                    { "hidden xs:block": i !== 1 },
-                    "animate-fade opacity-10"
-                  )}>
-                  <Logo />
-                </div>
-              ))}
+              <div
+                style={{ animationDuration: '4s' }}
+                className={clsx(
+                  "animate-fade bg-slate-400 rounded-full mb-6 opacity-5"
+                )}>
+                <LogoFilled className="h-64-w-64" />
+              </div>
             </div>
-            <h2 className="font-light">
+            <h4 className="font-light">
               {loading_state}
-            </h2>
+            </h4>
           </div>
         }
         <div

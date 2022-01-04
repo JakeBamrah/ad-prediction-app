@@ -35,18 +35,18 @@ module.exports = {
       keyframes: {
         fade: {
           '0%': {
-            opacity: '0.1'
+            opacity: '0.05',
           },
           '50%': {
-            opacity: '.8'
+            opacity: '.9'
           },
           '100%': {
-            opacity: '0.1'
+            opacity: '0.05'
           }
         }
       },
       animation: {
-        fade: 'fade 9s ease-in-out infinite',
+        fade: 'fade 1s ease-in-out infinite',
       }
     },
   },
