@@ -1,9 +1,13 @@
-import React, { FunctionComponent, useState } from 'react'
-import Plot from 'react-plotly.js'
+import React, { FunctionComponent } from 'react'
 import { RefreshCw } from 'react-feather'
+
+import createPlotlyComponent from 'react-plotly.js/factory';
+import Plotly from 'plotly.js-dist-min';
 
 import { Link } from 'react-router-dom'
 import Button from './components/Button'
+
+const Plot = createPlotlyComponent(Plotly)
 
 
 type Section = "UMAP" | "Predict"

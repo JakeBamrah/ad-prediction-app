@@ -75,9 +75,7 @@ const InputForm: FunctionComponent<FormProps> = ({ onSubmit }) => {
     FATHDEM: 0
   }
 
-  // finish off form
-  // build side-menu
-  // anything smaller than 400-450 px remove side menu text and center
+  // add abbreviations to help
   return (
     <div
       className={`
