@@ -12,7 +12,6 @@ type ResultsProps = {
   predicted_label: number | null
 }
 const Results: FunctionComponent<ResultsProps> = (props) => {
-  const [section, setSection] = useState<Section>(SECTIONS[0])
 
   const {
     data,
@@ -98,16 +97,9 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
   }
 
   const layout = {
-    // width: 400,
-    // height: 400,
-    showlegend: true,
-    legend: {
-      x: 1,
-      y: 1,
-      xanchor: 'right',
-    },
     plot_bgcolor: "transparent",
     paper_bgcolor: "transparent",
+    showlegend: false,
 
     // remove plot padding
     margin: {
@@ -123,7 +115,6 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
     zaxis: [0, predicted_patient.z]
   }
 
-  // TODO: make graph points more contrasty colours
   // Provide explanation for points
 
   // hide plotly options
@@ -143,20 +134,10 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
       <div className={`
           flex flex-col sm:flex-row items-center sm:items-start
           space-y-6 sm:space-y-0 space-x-4 space-between
-          w-full h-full text-justify
-          overflow-y-scroll overflow-x-hidden sm:overfow-y-auto
+          w-full h-full text-justify relative
+          overflow-y-hidden overflow-x-hidden
       `}>
-        <div className="hidden sticky top-0 basis-20 pl-2 sm:basis-1/2 sm:block">
-          <Breadcrumb
-            selected={section}
-            breadcrumbs={SECTIONS}
-            onSelect={(section) => setSection(section as Section)}
-          />
-        </div>
-        <div className={clsx(
-          section === 'UMAP' ? 'block' : 'hidden',
-          "basis-1/2"
-        )}>
+        <div className={clsx("w-full flex justify-center")}>
           <Plot
             data={plot}
             layout={layout}
@@ -164,14 +145,27 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
           />
         </div>
         <div className={clsx(
-          section === 'Predict' ? 'block sm:block' : 'block sm:hidden',
-          "sm:basis-1/2 w-full h-full flex flex-col items-center justify-center",
+          "absolute bottom-0 left-0 flex flex-col",
           "pb-4"
         )}>
-          <h2 className="block sm:hidden pb-4">Prediction Stats</h2>
+          <h4 className="pb-4">Prediction Stats</h4>
           <div className="text-left">
-            <p>Predicted label: {ad_labels[predicted_label ?? 1]}</p>
+            <div className="flex items-center">
+              <div
+                style={{ backgroundColor: '#f49949' }}
+                className="h-2 w-2 mr-2 rounded-full" />
+              <p>Predicted patient</p>
+            </div>
+            <div
+              className="flex items-center"
+            >
+              <div
+                style={{ backgroundColor: '#93cec1' }}
+                className="h-2 w-2 mr-2 rotate-45" />
+              <p>Sample patients</p>
+            </div>
             <p>Age: {Math.round(predicted_patient['AGE'])}</p>
+            <p>Predicted label: {ad_labels[predicted_label ?? 1]}</p>
             <p>Mini-Mental State Exam: {Math.round(predicted_patient['MMSE'])}</p>
             <p>Clinical Dimentia Rating (CDR): {predicted_patient['CDR']}</p>
           </div>
