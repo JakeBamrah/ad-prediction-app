@@ -98,16 +98,16 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
   }
 
   const layout = {
-    width: 400,
-    height: 400,
+    // width: 400,
+    // height: 400,
     showlegend: true,
     legend: {
       x: 1,
       y: 1,
       xanchor: 'right',
     },
-    plot_bgcolor: "#F1F5F9",
-    paper_bgcolor: "#F1F5F9",
+    plot_bgcolor: "transparent",
+    paper_bgcolor: "transparent",
 
     // remove plot padding
     margin: {
@@ -127,7 +127,10 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
   // Provide explanation for points
 
   // hide plotly options
-  const config = { displayModeBar: false }
+  const config = {
+    displayModeBar: false,
+    responsive: true
+  }
 
   const plot = [sample_patients, predicted]
 
@@ -143,7 +146,7 @@ const Results: FunctionComponent<ResultsProps> = (props) => {
           w-full h-full text-justify
           overflow-y-scroll overflow-x-hidden sm:overfow-y-auto
       `}>
-        <div className="hidden basis-20 pl-2 sm:basis-1/2 sm:block">
+        <div className="hidden sticky top-0 basis-20 pl-2 sm:basis-1/2 sm:block">
           <Breadcrumb
             selected={section}
             breadcrumbs={SECTIONS}
