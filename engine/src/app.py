@@ -132,6 +132,9 @@ def handler(event, context):
     )
     pred_label, *rest = results
 
+    # add +1 to the label to compensate for data gen changes
+    pred_label = pred_label + 1
+
     # update unlablled patient with predicted label
     df.loc[len(df) - 1, 'AD_LABEL'] = pred_label
     df_dict = defaultdict(list)
