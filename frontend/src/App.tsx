@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { Switch, Route, Redirect, Link, useHistory, useLocation } from 'react-router-dom'
 import clsx from 'clsx'
-import { GitHub } from 'react-feather'
+import { GitHub, Compass } from 'react-feather'
 
 import { loadAssets } from './data/AssetLoader'
 import PredictService from './data/PredictService'
@@ -131,15 +131,27 @@ const App = () => {
           <Redirect from="*" to="/" />
         </Switch>
       </div>
+      <div className="flex">
       <a
         target="_blank"
         rel="noreferrer"
-        className="flex pt-6 bottom-20"
+        className="flex pt-6 bottom-20 space-x-1"
         href="https://github.com/JakeBamrah/ad_prediction_app"
       >
         <p>Github</p>
-        <GitHub className="ml-1 mt-1 h-3 w-3" />
+        <GitHub className="mt-1 h-3 w-3" />
+        <p>|</p>
       </a>
+      <a
+        target="_blank"
+        rel="noreferrer"
+        className="flex pt-6 ml-1 bottom-20 space-x-1"
+        href="https://www.jakebamrah.me/"
+      >
+        <p>Portfolio</p>
+        <Compass className="mt-1 h-3 w-3" />
+      </a>
+      </div>
     </div>
   )
 }

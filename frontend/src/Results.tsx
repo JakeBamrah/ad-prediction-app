@@ -10,7 +10,6 @@ import Button from './components/Button'
 const Plot = createPlotlyComponent(Plotly)
 
 
-type Section = "UMAP" | "Predict"
 type ResultsProps = {
   data: any
   next_url: string

@@ -86,13 +86,13 @@
 }
 
 @layer components {
-  .windows-scrollbar::-webkit-scrollbar {
-    width: 3px;
-  }
-
   .neumorph-light {
     box-shadow: -4px -2px 5px 1px rgba(255, 255, 255, 0.4);
     filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
+  }
+
+  .windows-scrollbar::-webkit-scrollbar {
+    width: 3px;
   }
 
   .windows-scrollbar::-webkit-scrollbar-track {
@@ -100,6 +100,6 @@
   }
 
   .windows-scrollbar::-webkit-scrollbar-thumb {
-    background: #E5E7EB;
+    background: #CBD5E1;
   }
 }

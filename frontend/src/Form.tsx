@@ -75,7 +75,9 @@ const InputForm: FunctionComponent<FormProps> = ({ onSubmit }) => {
     FATHDEM: 0
   }
 
-  // add abbreviations to help
+  const nav = navigator.userAgent
+  const is_windows = nav.includes('Win')
+
   return (
     <div
       className={`
@@ -339,7 +341,9 @@ const InputForm: FunctionComponent<FormProps> = ({ onSubmit }) => {
             <div
               className={clsx(
                 section === 'Help' ? "block" : "hidden",
-                "flex flex-col pl-6 h-full basis-1/2 relative overflow-y-scroll space-y-2 font-light"
+                { "windows-scrollbar": is_windows },
+                "flex flex-col pl-6 h-full basis-1/2 relative space-y-2",
+                "overflow-y-scroll font-light"
               )}
             >
               <h4 className="font-medium pb-1">Overview</h4>
