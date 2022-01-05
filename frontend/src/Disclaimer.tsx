@@ -46,6 +46,21 @@ const Disclaimer: FunctionComponent<DisclaimerProps> = ({ next_url }) => {
           </a>
           —it has been provided for demonstration purposes only.
         </p>
+        <p>
+          Please see
+          <a
+            className="mx-1 underline"
+            href="https://github.com/JakeBamrah/ad_prediction_app"
+            rel="noreferrer"
+            target="_blank"
+          >
+            README
+          </a>
+          for more information on how to use the application.
+        </p>
+        <p>
+          This project is funded and provided by the creator.
+        </p>
       </div>
       <div className="block sm:hidden space-y-4">
         <p>
@@ -56,12 +71,32 @@ const Disclaimer: FunctionComponent<DisclaimerProps> = ({ next_url }) => {
         </p>
         <p>
           The original datasets were provided by the
-          <a className="ml-1 underline" href="https://adni.loni.usc.edu/" rel="noreferrer" target="_blank">
+          <a
+            className="ml-1 underline"
+            href="https://adni.loni.usc.edu/"
+            rel="noreferrer"
+            target="_blank"
+          >
             Alzheimer's Disease Neuroimaging Initiative
           </a>.
         </p>
         <p>
           This application is for demonstration purposes only.
+        </p>
+        <p>
+          Please see
+          <a
+            className="mx-1 underline"
+            href="https://github.com/JakeBamrah/ad_prediction_app"
+            rel="noreferrer"
+            target="_blank"
+          >
+            README
+          </a>
+          for more information on how to use the application.
+        </p>
+        <p>
+          This project is funded and provided by the creator.
         </p>
       </div>
       <div className="absolute bottom-0 right-0">
