@@ -12,9 +12,9 @@ A simple application that uses cognitive and neuropsychological assessment score
 #### What does it do?
 
 - Common AD testing metrics are entered for an individual.
-- These metrics are used to derive a set of MRI datapoints using sample data that can be associated with that individual.
+- These metrics are used to derive a set of MRI datapoints[^1] using sample data that can be associated with that individual.
 - The AD testing and MRI data are applied to a Machine-learning algorithm which predicts the current AD state for that given individual.
-- The individual is compared against 564 anonymised sample patients (previously diagnosed with AD) using data collected by the [*Alzheimer's Disease Neuroimaging Initiative*](http://adni.loni.usc.edu/).
+- The individual is compared against 564 anonymised sample patients (previously diagnosed with AD) using data collected by the [*Alzheimer's Disease Neuroimaging Initiative*](http://adni.loni.usc.edu/).[^2]
 - The comparison is presented as a 3-D visualization, whereby the individual in question can be compared visually to an extensive network of previously diagnosed patients.
 
 
@@ -37,3 +37,6 @@ This visualization may challenge the clinician's current views by offering them 
 
 #### Who is it for?
 This app was built to be accessible to anyone that may find it useful—clinicians, researchers or anyone curious about AD.
+
+[^1]: MRI data supplied by [Dr. Sanchez-Bornot](https://www.scopus.com/authid/detail.uri?authorId=9333309700), *University of Ulster*
+[^2]: [ADNI-3 Dataset](http://adni.loni.usc.edu/)
