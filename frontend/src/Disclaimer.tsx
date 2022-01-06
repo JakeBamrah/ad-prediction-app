@@ -50,7 +50,7 @@ const Disclaimer: FunctionComponent<DisclaimerProps> = ({ next_url }) => {
           Please see
           <a
             className="mx-1 underline"
-            href="https://github.com/JakeBamrah/ad_prediction_app"
+            href="https://github.com/JakeBamrah/ad_prediction_app#ad-prediction-app"
             rel="noreferrer"
             target="_blank"
           >
@@ -87,7 +87,7 @@ const Disclaimer: FunctionComponent<DisclaimerProps> = ({ next_url }) => {
           Please see
           <a
             className="mx-1 underline"
-            href="https://github.com/JakeBamrah/ad_prediction_app"
+            href="https://github.com/JakeBamrah/ad_prediction_app#ad-prediction-app"
             rel="noreferrer"
             target="_blank"
           >
