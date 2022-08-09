@@ -3,7 +3,6 @@ import { Switch, Route, Redirect, Link, useHistory, useLocation } from 'react-ro
 import clsx from 'clsx'
 import { GitHub, Compass } from 'react-feather'
 
-import { loadAssets } from './data/AssetLoader'
 import PredictService from './data/PredictService'
 
 import Home from './Home'
@@ -18,8 +17,6 @@ const App = () => {
   const [data, setData] = useState<any>(null)
   const [predicted_label, setPredictedLabel] = useState<number | null>(null)
 
-  const [app_loading, setAppLoading] = useState<boolean>(true)
-
   const [loading_state, setLoadingState] = useState<LoadingState>('Incomplete')
   const resetLoadingState = () => setLoadingState('Incomplete')
 
@@ -29,17 +26,6 @@ const App = () => {
   const at_home = location.pathname === "/"
 
   const predict_service = useMemo(() => new PredictService(), [])
-
-  if (app_loading) {
-    loadAssets().then(() => setAppLoading(false))
-    return <div
-      className={`
-        h-screen overflow-x-hidden text-transparent
-        bg-gradient-to-l from-slate-300 to-slate-200
-      `}
-    > Loading
-    </div>
-  }
 
   const onSubmit = (values: FormValues) => {
     setLoadingState('Predicting')
