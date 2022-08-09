@@ -5,50 +5,6 @@
 
 
 @layer base {
-  /* provide fonts in many formats for browser compatibility,
-   * font versions can be prepared using a webfont generator -
-   * generally, woff2 and ttf are the most important. */
-  @font-face {
-    font-family: 'Graphik';
-    /* make sure woff2 is preloaded in index.html to avoid font-jumping */
-    src: url('./fonts/Graphik-Light.woff2') format('woff2'),
-        url('./fonts/Graphik-Light.woff') format('woff'),
-        url('./fonts/Graphik-Light.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-      font-family: 'Graphik';
-      src: url('./fonts/Graphik-Bold.woff2') format('woff2'),
-          url('./fonts/Graphik-Bold.woff') format('woff'),
-          url('./fonts/Graphik-Bold.ttf') format('truetype');
-      font-weight: bold;
-      font-style: normal;
-      font-display: swap;
-  }
-
-  @font-face {
-      font-family: 'Graphik';
-      src: url('./fonts/Graphik-Semibold.woff2') format('woff2'),
-          url('./fonts/Graphik-Semibold.woff') format('woff'),
-          url('./fonts/Graphik-Semibold.ttf') format('truetype');
-      font-weight: 600;
-      font-style: normal;
-      font-display: swap;
-  }
-
-  @font-face {
-      font-family: 'Graphik';
-      src: url('./fonts/Graphik-Regular.woff2') format('woff2'),
-          url('./fonts/Graphik-Regular.woff') format('woff'),
-          url('./fonts/Graphik-Regular.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-  }
-
   html {
     @apply font-normal text-grey-900;
   }

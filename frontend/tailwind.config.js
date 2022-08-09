@@ -27,7 +27,7 @@ module.exports = {
         '128': '36rem'
       },
       fontFamily: {
-        sans: ['"Graphik"', 'sans-serif'],
+        sans: ['sans-serif'],
       },
       screens: {
         xs: '400px',
