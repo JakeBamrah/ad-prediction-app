@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { Switch, Route, Redirect, Link, useHistory, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate, Link, useNavigate, useLocation } from 'react-router-dom'
 import clsx from 'clsx'
 import { GitHub, Compass } from 'react-feather'
 
@@ -20,7 +20,7 @@ const App = () => {
   const [loading_state, setLoadingState] = useState<LoadingState>('Incomplete')
   const resetLoadingState = () => setLoadingState('Incomplete')
 
-  const history = useHistory()
+  const history = useNavigate()
 
   const location = useLocation()
   const at_home = location.pathname === "/"
@@ -84,38 +84,39 @@ const App = () => {
         p-8 sm:p-12 relative
         bg-slate-100 neumorph-light
       `}>
-        <Switch>
-          <Route exact path="/">
-            <Home next_url="/disclaimer" />
-          </Route>
+        <Routes>
+          <Route
+            path="/"
+            element={ <Home next_url="/disclaimer" /> }
+          />
 
-          <Route exact path="/disclaimer">
-            <Disclaimer next_url="/form" />
-          </Route>
+          <Route path="/disclaimer" element={ <Disclaimer next_url="/form" /> } />
 
-          <Route exact path="/form">
-            <div className={clsx(
-              { "hidden": loading_state !== "Incomplete" },
-              "h-full"
-            )} >
-              <Form onSubmit={onSubmit} />
-            </div>
-            <Loading loading_state={loading_state} />
-          </Route>
+          <Route
+            path="/form"
+            element={
+              <>
+                <div className={clsx(
+                  { "hidden": loading_state !== "Incomplete" },
+                  "h-full"
+                )} >
+                  <Form onSubmit={onSubmit} />
+                </div>
+                <Loading loading_state={loading_state} />
+            </>
+          } />
 
-          <Route exact path="/results">
-            {data &&
+          <Route path="/results" element={data &&
               <Results
                 data={data}
                 predicted_label={predicted_label}
                 next_url="/form"
                 onReset={resetLoadingState}
               />
-            }
-          </Route>
+          } />
 
-          <Redirect from="*" to="/" />
-        </Switch>
+          <Route path='*' element={<Navigate to="/" />} />
+        </Routes>
       </div>
       <div className="flex">
       <a
